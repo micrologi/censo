@@ -1,0 +1,15 @@
+{
+  "menu": [
+    {
+      "name": "Cadastros",
+      "icon": "menu-icon tf-icons ri-id-card-line",
+      "slug": "mural",
+      "submenu": [
+          {
+            "url": "estados",
+            "name": "Estados",
+            "icon": "menu-icon tf-icons ri-computer-line",
+            "slug": "estados"
+          },
+          {
+     
