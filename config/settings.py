@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "apps.charts",
     "apps.maps",
     "apps.transactions",
+    "apps.estados",
     "auth.apps.AuthConfig"
 ]
 

@@ -8,8 +8,17 @@
           {
             "url": "estados",
             "name": "Estados",
+            "permission": "estados.view_estado",
             "icon": "menu-icon tf-icons ri-computer-line",
             "slug": "estados"
-          },
-          {
-     
+          }
+      ]
+    },
+    {
+      "name": "Importação",
+      "icon": "menu-icon tf-icons ri-layout-2-line",
+      "slug": "layouts",
+      "url": "layouts-without-menu"
+    }
+  ]
+}
