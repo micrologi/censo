@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
-from django.db.models import Sum
 from web_project.template_helpers.theme import TemplateHelper
 from web_project import TemplateLayout
 from apps.transactions.models import Transaction
+
 
 class TransactionListView(TemplateView):
 
@@ -11,22 +11,24 @@ class TransactionListView(TemplateView):
         transactions = self.get_annotated_transactions()
         fields = Transaction._meta.get_fields()
 
-        #Monta a lista de informações dinamicamente
+        # Monta a lista de informações dinamicamente
         records = []
         iCont = 0
         for transaction in transactions:
-            records.append([iCont,[[],[]]])
+            records.append([iCont, [[], []]])
             for field in fields:
 
                 attname = field.attname
                 records[iCont][1][0].append(transaction.__dict__[attname])
                 records[iCont][1][1].append(field.get_internal_type())
-            iCont+=1
+            iCont += 1
 
-        #Zipa as 2 listas para poder manipular no template
+        # Zipa as 2 listas para poder manipular no template
         for iCont in range(len(records)):
-            records[iCont][0] = records[iCont][1][0][0]  #Capturo o ID para acessar facilmente no template
-            records[iCont][1] = zip(records[iCont][1][0],records[iCont][1][1])
+            records[iCont][0] = records[iCont][1][0][
+                0
+            ]  # Capturo o ID para acessar facilmente no template
+            records[iCont][1] = zip(records[iCont][1][0], records[iCont][1][1])
 
         # Update the context
         context.update(

@@ -6,7 +6,7 @@ class Estado(models.Model):
     sigla = models.CharField(
         verbose_name="Sigla", max_length=2, db_index=True, default="SP", blank=False
     )
-    nomeestado = models.CharField(
+    nome_estado = models.CharField(
         verbose_name="Estado",
         max_length=50,
         db_index=True,

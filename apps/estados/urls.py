@@ -7,27 +7,29 @@ from apps.estados.transaction_add.views import TransactionAddView
 from apps.estados.transaction_update.views import TransactionUpdateView
 from apps.estados.transaction_delete.views import TransactionDeleteView
 
+template_prefix = "transactions"  # Transaction.tableName()
+
 urlpatterns = [
     path(
         Transaction.tableName() + "/list/",
         login_required(
-            TransactionListView.as_view(
-                template_name=Transaction.tableName() + "_list.html"
-            )
+            TransactionListView.as_view(template_name=template_prefix + "_list.html")
         ),
         name=Transaction.tableName(),
     ),
     path(
         Transaction.tableName() + "/add/",
         login_required(
-            TransactionAddView.as_view(template_name="transactions_add.html")
+            TransactionAddView.as_view(template_name=template_prefix + "_add.html")
         ),
         name=Transaction.tableName() + "-add",
     ),
     path(
         Transaction.tableName() + "/update/<int:pk>",
         login_required(
-            TransactionUpdateView.as_view(template_name="transactions_update.html")
+            TransactionUpdateView.as_view(
+                template_name=template_prefix + "_update.html"
+            )
         ),
         name=Transaction.tableName() + "-update",
     ),
