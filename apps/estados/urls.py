@@ -7,7 +7,7 @@ from apps.estados.transaction_add.views import TransactionAddView
 from apps.estados.transaction_update.views import TransactionUpdateView
 from apps.estados.transaction_delete.views import TransactionDeleteView
 
-template_prefix = "transactions"  # Transaction.tableName()
+template_prefix = Transaction.tableName()  # "transactions"
 
 urlpatterns = [
     path(

@@ -1,10 +1,10 @@
 'use strict';
 
+
 $(function () {
   let borderColor, bodyBg, headingColor;
 
-  if (isDarkStyle) {
-    borderColor = config.colors_dark.borderColor;
+  borderColor = config.colors_dark.borderColor;
     bodyBg = config.colors_dark.bodyBg;
     headingColor = config.colors_dark.headingColor;
   } else {

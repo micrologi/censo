@@ -3,6 +3,7 @@
 $(function () {
   let borderColor, bodyBg, headingColor;
 
+
   if (isDarkStyle) {
     borderColor = config.colors_dark.borderColor;
     bodyBg = config.colors_dark.bodyBg;

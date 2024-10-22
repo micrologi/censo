@@ -45,8 +45,7 @@
 
 
 <!-- Transactions Table -->
-<!-- permission required: view_transaction -->
-{% if perms.transactions.view_transaction %}
+{% if perms.estados.view_transaction %}
 
 <div class="card">
   <div class="card-datatable table-responsive">
@@ -112,12 +111,12 @@
           <td>
             <div class="d-inline-block text-nowrap">
               <!-- permission required: edit_transaction -->
-              {% if perms.transactions.edit_transaction %}
-              <a href="{% url 'transactions-update' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect" title="Editar"><i class='ri-edit-box-line ri-22px'></i></a>
+              {% if perms.estados.edit_transaction %}
+              <a href="{% url 'estados-update' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect" title="Editar"><i class='ri-edit-box-line ri-22px'></i></a>
               {% endif %}
               <!-- permission required: delete_transaction -->
-              {% if perms.transactions.delete_transaction %}
-              <a href="{% url 'transactions-delete' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect delete-transaction" data-transaction-username="{{ transaction.customer|capfirst }}" title="Deletar"><i class="ri-delete-bin-7-line ri-22px"></i></a>
+              {% if perms.estados.delete_transaction %}
+              <a href="{% url 'estados-delete' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect delete-transaction" title="Deletar"><i class="ri-delete-bin-7-line ri-22px"></i></a>
               {% endif %}
             </div>
           </td>

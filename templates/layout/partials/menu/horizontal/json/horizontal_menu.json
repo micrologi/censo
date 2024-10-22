@@ -11,14 +11,21 @@
             "permission": "estados.view_estado",
             "icon": "menu-icon tf-icons ri-computer-line",
             "slug": "estados"
+          },
+          {
+            "url": "transactions",
+            "name": "Empresas",
+            "permission": "transactions.view_transaction",
+            "icon": "menu-icon tf-icons ri-computer-line",
+            "slug": "transactions"
           }
       ]
     },
     {
-      "name": "ImportaÃ§Ã£o",
+      "url": "transactions",
+      "name": "Importação",
       "icon": "menu-icon tf-icons ri-layout-2-line",
-      "slug": "layouts",
-      "url": "layouts-without-menu"
+      "slug": "layouts"
     }
   ]
 }

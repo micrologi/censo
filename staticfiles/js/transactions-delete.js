@@ -6,10 +6,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
     deleteButtons.forEach(deleteButton => {
       deleteButton.addEventListener('click', function (e) {
         e.preventDefault();
-        const userName = this.getAttribute('data-transaction-username');
         Swal.fire({
           title: 'Delete Transaction?',
-          html: `<p class="text-danger">Are you sure you want to delete transaction of ?<br> <span class="fw-medium text-body">${userName}</span></p>`,
+          html: `<p class="text-danger">Are you sure you want to delete transaction of ?</p>`,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Delete',
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
           } else {
             Swal.fire({
               title: 'Cancelled',
-              html: `<p>Did not delete <span class="fw-medium text-primary">${userName}</span> Transaction!</p>`,
+              html: `<p>Did not delete Transaction!</p>`,
               icon: 'error',
               confirmButtonText: 'Ok',
               customClass: {
