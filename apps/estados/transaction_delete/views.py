@@ -5,12 +5,13 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from apps.estados.models import Estado as Transaction
 
+
 class TransactionDeleteView(PermissionRequiredMixin, DeleteView):
 
-    permission_required = Transaction.tableName() + ".delete_transaction"
+    permission_required = Transaction._meta.db_table + ".delete_transaction"
 
     def get(self, request, pk):
         transaction = get_object_or_404(Transaction, id=pk)
         transaction.delete()
         messages.success(request, "Registro deletado")
-        return redirect(Transaction.tableName())
+        return redirect(Transaction._meta.db_table)

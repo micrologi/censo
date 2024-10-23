@@ -10,21 +10,24 @@ class Estado(models.Model):
         default="",
         validators=[],
         blank=False,
+        unique=True,  # Se esse valor não pode duplicar na database, setar como True
     )
-    nome_estado = models.CharField(
+    nomeestado = models.CharField(
         verbose_name="Estado",
         max_length=50,
         db_index=True,
         default="",
         validators=[],
         blank=False,
+        unique=True,
     )
-
-    def moduleName():
-        return "Estados"
-
-    def tableName():
-        return "estados"
 
     def __str__(self):
         return self.id
+
+    class Meta:
+        db_table = "estados"
+        verbose_name = "Estado"
+        verbose_name_plural = "Estados"
+        db_table_comment = "Estados Brasileiros"
+        indexes = [models.Index(fields=["nomeestado"])]

@@ -44,7 +44,8 @@ class TransactionAddView(PermissionRequiredMixin, TemplateView):
                 else:
                     messages.error(request, "Um registro semelhante já existe")
             else:
-                messages.error(request, "Adição falhou")
+                messages.error(request, form.errors)
+
         except BaseException as e:
             print(str(e))
 

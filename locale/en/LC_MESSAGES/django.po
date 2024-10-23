@@ -39,7 +39,7 @@ msgid "German"
 msgstr "Deutsch"
 
 msgid "Academy"
-msgstr "Academy"
+msgstr "Academia"
 
 msgid "My Course"
 msgstr "My Course"

@@ -10,7 +10,7 @@ from apps.estados.models import Estado as Transaction
 
 
 class TransactionAddView(PermissionRequiredMixin, TemplateView):
-    permission_required = Transaction.tableName() + ".add_transaction"
+    permission_required = Transaction._meta.db_table + ".add_transaction"
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
@@ -36,30 +36,26 @@ class TransactionAddView(PermissionRequiredMixin, TemplateView):
         try:
             form = TransactionForm(request.POST)
 
-            print(request.POST)
-
             if form.is_valid():
-                if not self.transaction_exists(form.cleaned_data):
-                    form.save()
-                    messages.success(request, "Registro adicionado")
-                else:
-                    messages.error(request, "Um registro semelhante já existe")
+                form.save()
+                messages.success(request, "Registro adicionado com sucesso")
             else:
-                messages.error(request, "Adição falhou.")
+                messages.error(request, form.errors)
 
         except BaseException as e:
-            print(str(e))
+            messages.error(request, "Erro: " + str(e))
 
-        return redirect(Transaction.tableName())
+        return redirect(Transaction._meta.db_table)
 
-    def transaction_exists(self, cleaned_data):
-        return False
-        """
-        return Transaction.objects.filter(
-            customer__iexact=cleaned_data["customer"],
-            transaction_date=cleaned_data["transaction_date"],
-            due_date=cleaned_data["due_date"],
-            total=cleaned_data["total"],
-            status=cleaned_data["status"],
-        ).exists()
-        """
+    def exist_record(self, cleaned_data):
+        fields = Transaction._meta.get_fields()
+
+        filter_dic = []
+        for field in fields:
+            if field.attname == "id":
+                continue
+            filter_dic.append([field.attname, cleaned_data[field.attname]])
+
+        filter_dic = dict(filter_dic)
+
+        return Transaction.objects.filter(**filter_dic).exists()

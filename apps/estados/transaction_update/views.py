@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.db.models import Q
 from django.views.generic import TemplateView
 from web_project import TemplateLayout
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -11,7 +9,7 @@ from apps.estados.models import Estado as Transaction
 
 
 class TransactionUpdateView(PermissionRequiredMixin, TemplateView):
-    permission_required = Transaction.tableName() + ".update_transaction"
+    permission_required = Transaction._meta.db_table + ".update_transaction"
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
@@ -21,19 +19,21 @@ class TransactionUpdateView(PermissionRequiredMixin, TemplateView):
         values = []
 
         for field in fields:
-            values.append([
-                            field.name,
-                            field.attname,
-                            field.verbose_name,
-                            field.get_internal_type(),
-                            field.choices,
-                            field.max_length,
-                            transaction.__dict__[field.attname],
-                            field.blank
-                        ])
+            values.append(
+                [
+                    field.name,
+                    field.attname,
+                    field.verbose_name,
+                    field.get_internal_type(),
+                    field.choices,
+                    field.max_length,
+                    transaction.__dict__[field.attname],
+                    field.blank,
+                ]
+            )
 
-        context['transaction'] = transaction
-        context['values'] = values
+        context["transaction"] = transaction
+        context["values"] = values
 
         return context
 
@@ -46,15 +46,14 @@ class TransactionUpdateView(PermissionRequiredMixin, TemplateView):
             if not self.transaction_exists(form.cleaned_data, transaction):
                 form.save()
                 messages.success(request, "Registro atualizado")
-                return redirect(Transaction.tableName())
+                return redirect(Transaction._meta.db_table)
             else:
                 messages.error(request, "Um registro semelhante já existe")
 
         else:
-            messages.error(request,form.errors)
+            messages.error(request, form.errors)
 
-        return redirect(Transaction.tableName())
-
+        return redirect(Transaction._meta.db_table)
 
     def get_transaction(self, pk):
         return Transaction.objects.get(pk=pk)

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -27,11 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", default='')
+SECRET_KEY = os.environ.get("SECRET_KEY", default="")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", 'True').lower() in ['true', 'yes', '1']
+DEBUG = os.environ.get("DEBUG", "True").lower() in ["true", "yes", "1"]
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
@@ -80,7 +81,7 @@ INSTALLED_APPS = [
     "apps.maps",
     "apps.transactions",
     "apps.estados",
-    "auth.apps.AuthConfig"
+    "auth.apps.AuthConfig",
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,6 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
-
     "web_project.language_middleware.DefaultLanguageMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -134,12 +134,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": 'mssql',
-        "NAME": 'CENSORPPS',
-        "USER": 'sa',
-        "PASSWORD": 'micro108972',
+        "ENGINE": "mssql",
+        "NAME": "CENSORPPS",
+        "USER": "sa",
+        "PASSWORD": "micro108972",
         "HOST": "NOTEBOOK-03\\SQLEXPRESS",
-        "OPTIONS": {'driver': 'ODBC Driver 17 for SQL Server',
+        "OPTIONS": {
+            "driver": "ODBC Driver 17 for SQL Server",
         },
     },
 }
@@ -178,7 +179,7 @@ LANGUAGES = [
 
 # Set default language
 # ! Make sure you have cleared the browser cache after changing the default language
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = "pt"
 
 TIME_ZONE = "UTC"
 

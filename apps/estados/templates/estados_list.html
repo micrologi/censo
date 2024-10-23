@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{{module_name}}{% endblock title %}
+{% block title %}{{verbose_name_plural}}{% endblock title %}
 
 {% block vendor_css %}
 {{ block.super }}
@@ -132,7 +132,7 @@
 <!--/ Transactions Table -->
 <script>
 var addTransactionBtn = '{% if perms.transactions.add_transaction %}' + true + '{% endif %}';
-var table_name = '{{table_name}}';
+var table_name = '{{db_table}}';
 </script>
 
 {% endblock %}
