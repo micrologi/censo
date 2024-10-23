@@ -6,11 +6,39 @@
       "slug": "mural",
       "submenu": [
           {
+            "url": "cargos",
+            "name": "Cargos ocupacionais",
+            "permission": "cargos.view_cargo",
+            "icon": "menu-icon tf-icons ri-graduation-cap-line",
+            "slug": "cargos"
+          },
+          {
+            "url": "vinculos",
+            "name": "Tipos de Vinculos",
+            "permission": "vinculos.view_vinculo",
+            "icon": "menu-icon tf-icons ri-arrow-left-right-fill",
+            "slug": "vinculos"
+          },
+          {
+            "url": "poderes",
+            "name": "Tipos de Poderes",
+            "permission": "poderes.view_poder",
+            "icon": "menu-icon tf-icons ri-building-2-line",
+            "slug": "poderes"
+          },
+          {
             "url": "estados",
-            "name": "Estados",
+            "name": "Estados brasileiros",
             "permission": "estados.view_estado",
-            "icon": "menu-icon tf-icons ri-computer-line",
+            "icon": "menu-icon tf-icons ri-compass-3-line",
             "slug": "estados"
+          },
+          {
+            "url": "cidades",
+            "name": "Cidades brasileiras",
+            "permission": "cidades.view_cidade",
+            "icon": "menu-icon tf-icons ri-compass-3-fill",
+            "slug": "cidades"
           },
           {
             "url": "transactions",
@@ -18,12 +46,13 @@
             "permission": "transactions.view_transaction",
             "icon": "menu-icon tf-icons ri-computer-line",
             "slug": "transactions"
-          }
+          },
+          {}
       ]
     },
     {
       "url": "transactions",
-      "name": "Importação",
+      "name": "ImportaÃ§Ã£o",
       "icon": "menu-icon tf-icons ri-layout-2-line",
       "slug": "layouts"
     }

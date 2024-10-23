@@ -1,11 +1,11 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from apps.<<crud>>.models import <<model>> as Transaction
-from apps.<<crud>>.transaction_list.views import TransactionListView
-from apps.<<crud>>.transaction_add.views import TransactionAddView
-from apps.<<crud>>.transaction_update.views import TransactionUpdateView
-from apps.<<crud>>.transaction_delete.views import TransactionDeleteView
+from apps.vinculos.models import Vinculo as Transaction
+from apps.vinculos.transaction_list.views import TransactionListView
+from apps.vinculos.transaction_add.views import TransactionAddView
+from apps.vinculos.transaction_update.views import TransactionUpdateView
+from apps.vinculos.transaction_delete.views import TransactionDeleteView
 
 urlpatterns = [
     path(

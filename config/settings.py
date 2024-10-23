@@ -82,6 +82,10 @@ INSTALLED_APPS = [
     "apps.transactions",
     "apps.estados",
     "apps.cidades",
+    "apps.cargos",
+    "apps.vinculos",
+    "apps.poderes",
+    # <<crudsettings>>
     "auth.apps.AuthConfig",
 ]
 

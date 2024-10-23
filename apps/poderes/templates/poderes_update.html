@@ -1,0 +1,95 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}Atualizar{% endblock title %}
+
+{% block vendor_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/libs/select2/select2.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/form-validation.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/flatpickr/flatpickr.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/sweetalert2/sweetalert2.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+{{ block.super }}
+<script src="{% static 'vendor/libs/select2/select2.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/popular.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/bootstrap5.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/auto-focus.js' %}"></script>
+<script src="{% static 'vendor/libs/flatpickr/flatpickr.js' %}"></script>
+<script src="{% static 'vendor/libs/sweetalert2/sweetalert2.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/transactions-add-update.js' %}"></script>
+<script src="{% static 'js/transactions-delete.js' %}"></script>
+{% endblock page_js %}
+{% block content %}
+
+<!-- Update Transactions Form -->
+<div class="card">
+  <div class="card-body">
+    <form class="update-transaction pt-0" id="UpdateTransactionForm" action="{% url 'poderes-update' transaction.id %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="id" id="user_id">
+      {% for value in values %}
+        <div class="form-floating form-floating-outline mb-6">
+        {% if value.0 == "id" %}
+          <input type="hidden" name="id" id="user_id" value="value.6">
+        {% else %}
+
+          {% if value.4 %}
+
+            <select id="{{value.1}}" class="select2 form-select" name="{{value.0}}">
+              {% for choice in value.4 %}
+                {% if choice.0 == value.6 %}
+                  <option value="{{choice.0}}" selected>{{choice.1}}</option>
+                {% else %}
+                  <option value="{{choice.0}}">{{choice.1}}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+            <label for="{{value.0}}">{{value.2}}</label>
+
+          {% elif value.3 == 'CharField' %}
+              <input type="text" value="{{value.6}}" class="form-control" id="{{value.1}}" name="{{value.0}}" placeholder="{{value.2}}" maxlength="{{value.5|default:''}}" {% if value.7 == False %}required{% endif %} />
+              <label for="{{value.0}}">{{value.2}}</label>
+          {% elif value.3 == 'DateField' %}
+              <input type="date" class="form-control" id="{{value.1}}" name="{{value.0}}" placeholder="{{value.2}}" value="{{value.6}}" {% if value.7 == False %}required{% endif %} />
+              <label for="{{value.0}}">{{value.2}}</label>
+          {% elif value.3 == 'DateTimeField' %}
+              <input type="datetime-local" class="form-control" id="{{value.1}}" name="{{value.0}}" placeholder="{{value.2}}" value="{{value.6}}" {% if value.7 == False %}required{% endif %} />
+              <label for="{{value.0}}">{{value.2}}</label>
+          {% elif value.3 == 'DecimalField' %}
+              <input type="number" class="form-control" id="{{value.1}}" name="{{value.0}}" placeholder="{{value.2}}" pattern="^\d*(\.\d{0,2})?$" value="{{value.6}}" {% if value.7 == False %}required{% endif %} />
+              <label for="{{value.0}}">{{value.2}}</label>
+          {% elif value.3 == 'BooleanField' %}
+              <select id="{{value.1}}" class="select2 form-select" name="{{value.0}}">
+                  {% if value.6 == True %}
+                    <option value="True" selected>Verdadeiro</option>
+                    <option value="False">Falso</option>
+                  {% else %}
+                    <option value="True">Verdadeiro</option>
+                    <option value="False" selected>Falso</option>
+                  {% endif %}
+              </select>
+              <label for="{{value.0}}">{{value.2}}</label>
+          {% else %}
+            <input type="text" class="form-control" id="{{value.1}}" name="{{value.0}}" placeholder="{{value.2}}" maxlength="{{value.5|default:''}}" value="{{value.6}}" {% if value.7 == False %}required{% endif %} />
+            <label for="{{value.0}}">{{value.2}}</label>
+          {% endif %}
+
+        {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary me-sm-3 me-1" name="submitButton">Salvar</button>
+      <a href="{% url 'poderes' %}" class="btn btn-outline-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+<!--/ Update Transactions Form -->
+{% endblock %}

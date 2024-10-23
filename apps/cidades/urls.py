@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from apps.cidades.models import Cidades as Transaction
+from apps.cidades.models import Cidade as Transaction
 from apps.cidades.transaction_list.views import TransactionListView
 from apps.cidades.transaction_add.views import TransactionAddView
 from apps.cidades.transaction_update.views import TransactionUpdateView

@@ -19,6 +19,10 @@ def main():
         sys.exit()
 
     dic = {
+        "# <<crudsettings>>": '"apps.' + sys.argv[1] + '",\n    # <<crudsettings>>',
+        "# <<crudurls>>": 'path("", include("apps.'
+        + sys.argv[1]
+        + '.urls")),\n    # <<crudurls>>',
         "<<crud>>": sys.argv[1],
         "<<module>>": sys.argv[2],
         "<<model>>": sys.argv[3],
@@ -62,37 +66,39 @@ def main():
     )
 
     listfiles = {
-        "./apps/" + dic.get("<<crud>>") + "/urls.py": "Definindo rotas",
+        "./config/settings.py": "Adicionando aplicação na configuração",
+        "./config/urls.py": "Adicionando rotas",
+        "./apps/" + dic.get("<<crud>>") + "/urls.py": "Definindo rotas do módulo",
         "./apps/" + dic.get("<<crud>>") + "/models.py": "Criando o modelo",
         "./apps/" + dic.get("<<crud>>") + "/forms.py": "Gerando formulário",
         "./apps/" + dic.get("<<crud>>") + "/admin.py": "Gerando painel administrativo",
         "./apps/"
         + dic.get("<<crud>>")
-        + "/transaction_update/views.py": "Visão de atualização",
+        + "/transaction_update/views.py": "Atualizando Visão de atualização",
         "./apps/"
         + dic.get("<<crud>>")
-        + "/transaction_list/views.py": "Visão de listagem",
+        + "/transaction_list/views.py": "Atualizando Visão de listagem",
         "./apps/"
         + dic.get("<<crud>>")
-        + "/transaction_delete/views.py": "Visão de deleção",
+        + "/transaction_delete/views.py": "Atualizando Visão de deleção",
         "./apps/"
         + dic.get("<<crud>>")
-        + "/transaction_add/views.py": "Visão de adição",
-        "./apps/"
-        + dic.get("<<crud>>")
-        + "/templates/"
-        + dic.get("<<crud>>")
-        + "_add.html": "Visão de adição",
+        + "/transaction_add/views.py": "Atualizando Visão de adição",
         "./apps/"
         + dic.get("<<crud>>")
         + "/templates/"
         + dic.get("<<crud>>")
-        + "_list.html": "Visão de adição",
+        + "_add.html": "Atualizando Template de adição",
         "./apps/"
         + dic.get("<<crud>>")
         + "/templates/"
         + dic.get("<<crud>>")
-        + "_update.html": "Visão de adição",
+        + "_list.html": "Atualizando Template de listagem",
+        "./apps/"
+        + dic.get("<<crud>>")
+        + "/templates/"
+        + dic.get("<<crud>>")
+        + "_update.html": "Atualizando Visão de atualização",
     }
 
     for listfileskey in listfiles:
@@ -112,9 +118,12 @@ def main():
         os.remove(listfileskey)
         os.rename(namew, namer)
 
-    print(
-        "Crud gerado com sucesso. Adicione ele como APP da aplicação, preencha o MODEL e faça o MAKEMIGRATIONS!"
-    )
+    print("Crud gerado com sucesso!")
+    print()
+    print("Próximas etapas:")
+    print("- Preencha o MODEL")
+    print("- Faça MAKEMIGRATIONS MIGRATES")
+    print("- Adicione o menu")
 
 
 if __name__ == "__main__":
