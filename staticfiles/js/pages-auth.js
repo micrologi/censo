@@ -18,67 +18,67 @@ document.addEventListener('DOMContentLoaded', function (e) {
           username: {
             validators: {
               notEmpty: {
-                message: 'Please enter username'
+                message: 'Informe o nome de usuário'
               },
               stringLength: {
                 min: 4,
-                message: 'Username must be more than 4 characters'
+                message: 'Nome de usuário deve ter mais de 4 caracteres'
               }
             }
           },
           email: {
             validators: {
               notEmpty: {
-                message: 'Please enter your email'
+                message: 'Informe seu e-mail'
               },
               emailAddress: {
-                message: 'Please enter valid email address'
+                message: 'Informe um endereço de e-mail válido'
               }
             }
           },
           'email-username': {
             validators: {
               notEmpty: {
-                message: 'Please enter email / username'
+                message: 'Informe o e-mail ou nome de usuário'
               },
               stringLength: {
                 min: 4,
-                message: 'Username must be more than 4 characters'
+                message: 'Nome de usuário deve ter mais de 4 caracteres'
               }
             }
           },
           password: {
             validators: {
               notEmpty: {
-                message: 'Please enter your password'
+                message: 'Informe sua senha'
               },
               stringLength: {
                 min: 4,
-                message: 'Password must be more than 4 characters'
+                message: 'Senha deve ter mais de 4 caracteres'
               }
             }
           },
           'confirm-password': {
             validators: {
               notEmpty: {
-                message: 'Please confirm password'
+                message: 'Confirme a senha'
               },
               identical: {
                 compare: function () {
                   return formAuthentication.querySelector('[name="password"]').value;
                 },
-                message: 'The password and its confirm are not the same'
+                message: 'A senha e sua confirmação são diferentes'
               },
               stringLength: {
                 min: 4,
-                message: 'Password must be more than 4 characters'
+                message: 'Senha deve ter mais de 4 caracteres'
               }
             }
           },
           terms: {
             validators: {
               notEmpty: {
-                message: 'Please agree terms & conditions'
+                message: 'Aceite os termos e condições'
               }
             }
           }
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (status === 'Valid') {
               // If the form is valid, show loading state
               btnSubmit.classList.add('disabled');
-              btnText.textContent = 'Sending email... ';
+              btnText.textContent = 'Enviando e-mail... ';
               btnLoader.classList.remove('visually-hidden');
             }
           });

@@ -59,6 +59,7 @@
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
         {% for record in records %}
         <tr>
@@ -123,6 +124,7 @@
         </tr>
         {% endfor %}
       </tbody>
+
     </table>
   </div>
 </div>
@@ -130,6 +132,7 @@
 <!--/ Transactions Table -->
 <script>
 var addTransactionBtn = '{% if perms.transactions.add_transaction %}' + true + '{% endif %}';
+var table_name = '{{table_name}}';
 </script>
 
 {% endblock %}

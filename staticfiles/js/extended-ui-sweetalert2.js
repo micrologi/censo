@@ -414,7 +414,7 @@
         inputAttributes: {
           required: true
         },
-        validationMessage: 'This field is required'
+        validationMessage: 'Este campo é obrigatório'
       });
 
       async function backAndForward() {

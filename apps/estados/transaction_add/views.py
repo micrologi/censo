@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from apps.estados.forms import TransactionForm
 from apps.estados.models import Estado as Transaction
 
+
 class TransactionAddView(PermissionRequiredMixin, TemplateView):
     permission_required = Transaction.tableName() + ".add_transaction"
 
@@ -15,9 +16,9 @@ class TransactionAddView(PermissionRequiredMixin, TemplateView):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
         fields = Transaction._meta.get_fields()
 
-        #Workaround pois preciso do nome com hifén no template
+        # Workaround pois preciso do nome com hifén no template
         for field in fields:
-            field.attname = field.attname.replace('_','-')
+            field.attname = field.attname.replace("_", "-")
 
         # Update the context
         context.update(
@@ -35,6 +36,8 @@ class TransactionAddView(PermissionRequiredMixin, TemplateView):
         try:
             form = TransactionForm(request.POST)
 
+            print(request.POST)
+
             if form.is_valid():
                 if not self.transaction_exists(form.cleaned_data):
                     form.save()
@@ -42,12 +45,12 @@ class TransactionAddView(PermissionRequiredMixin, TemplateView):
                 else:
                     messages.error(request, "Um registro semelhante já existe")
             else:
-                messages.error(request, "Adição falhou")
+                messages.error(request, "Adição falhou.")
+
         except BaseException as e:
             print(str(e))
 
         return redirect(Transaction.tableName())
-
 
     def transaction_exists(self, cleaned_data):
         return False

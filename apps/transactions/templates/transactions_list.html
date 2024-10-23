@@ -60,11 +60,13 @@
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
         {% for record in records %}
         <tr>
           <td></td>
           {% for field_value,field_atrib in record.1 %}
+
             {% if field_atrib == 'BooleanField' %}
               <td class="text-nowrap text-center">
                 <div class="badge bg-label-{% if field_value == True %}success{% else %}warning{% endif %} rounded-pill">
@@ -131,6 +133,7 @@
 <!--/ Transactions Table -->
 <script>
 var addTransactionBtn = '{% if perms.transactions.add_transaction %}' + true + '{% endif %}';
+var table_name = '{{table_name}}';
 </script>
 
 {% endblock %}

@@ -1,10 +1,11 @@
 'use strict';
 
-
 $(function () {
   let borderColor, bodyBg, headingColor;
 
-  borderColor = config.colors_dark.borderColor;
+
+  if (isDarkStyle) {
+    borderColor = config.colors_dark.borderColor;
     bodyBg = config.colors_dark.bodyBg;
     headingColor = config.colors_dark.headingColor;
   } else {
@@ -27,6 +28,7 @@ $(function () {
   if (dt_transaction_table.length) {
     var dt_transaction = dt_transaction_table.DataTable({
       order: [[1, 'desc']],
+      scrollX: true,
       dom:
         '<"row"' +
         '<"col-md-2"<l>>' +
@@ -39,7 +41,7 @@ $(function () {
       language: {
         sLengthMenu: '_MENU_',
         search: '',
-        searchPlaceholder: 'Search..',
+        searchPlaceholder: 'Pesquisar...',
         paginate: {
           next: '<i class="ri-arrow-right-s-line"></i>',
           previous: '<i class="ri-arrow-left-s-line"></i>'
@@ -50,14 +52,13 @@ $(function () {
         {
           extend: 'collection',
           className: 'btn btn-outline-secondary dropdown-toggle me-4 waves-effect waves-light',
-          text: '<i class="ri-download-line ri-16px me-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
+          text: '<i class="ri-download-line ri-16px me-1"></i> <span class="d-none d-sm-inline-block">Exportar</span>',
           buttons: [
             {
               extend: 'print',
-              text: '<i class="ri-printer-line me-1" ></i>Print',
+              text: '<i class="ri-printer-line me-1" ></i>Imprimir',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
                 // prevent avatar to be print
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -94,7 +95,6 @@ $(function () {
               text: '<i class="ri-file-text-line me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -118,7 +118,6 @@ $(function () {
               text: '<i class="ri-file-excel-line me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -142,7 +141,6 @@ $(function () {
               text: '<i class="ri-file-pdf-line me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -163,10 +161,9 @@ $(function () {
             },
             {
               extend: 'copy',
-              text: '<i class="ri-file-copy-line me-1"></i>Copy',
+              text: '<i class="ri-file-copy-line me-1"></i>Copiar',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -188,91 +185,17 @@ $(function () {
           ]
         },
         {
-          text: '<i class="ri-add-line ri-16px me-0 me-sm-1_5"></i><span class="d-none d-sm-inline-block">Add Transaction</span>',
+          text: '<i class="ri-add-line ri-16px me-0 me-sm-1_5"></i><span class="d-none d-sm-inline-block">Adicionar</span>',
           className: 'add-new btn btn-primary waves-effect waves-light' + (addTransactionBtn ? '' : ' disabled'),
           action: function (e, dt, button, config) {
-            window.location.href = '/transactions/add/';
+            window.location.href = '/' + table_name + '/add/';
           }
         }
       ],
-      responsive: true,
+      responsive: false,
       // For responsive popup
       rowReorder: {
         selector: 'td:nth-child(2)'
-      },
-      // For responsive popup button and responsive priority for user name
-      columnDefs: [
-        {
-          // For Responsive Popup Button (plus icon)
-          className: 'control',
-          searchable: false,
-          orderable: false,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
-        {
-          // For Id
-          targets: 1,
-          responsivePriority: 3
-        },
-        {
-          // For Customer Name
-          targets: 2,
-          responsivePriority: 4
-        },
-        {
-          // For Amount
-          targets: 5,
-          responsivePriority: 5
-        },
-        {
-          // For Status
-          targets: 6,
-          responsivePriority: 6
-        },
-        {
-          targets: 7,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
-          responsivePriority: 1
-        }
-      ],
-      // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Transaction Detail' + ' ' + data[2];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
       }
     });
     $('.dataTables_filter input').addClass('ms-0');

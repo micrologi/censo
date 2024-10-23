@@ -34,11 +34,11 @@ class TransactionListView(TemplateView):
         # Update the context
         context.update(
             {
-                "module_name": Transaction.moduleName(),
-                "table_name": Transaction.tableName(),
                 "records": records,
                 "fields": fields,
                 "transactions_count": Transaction.objects.count(),
+                "module_name": Transaction.moduleName(),
+                "table_name": Transaction.tableName(),
             }
         )
         TemplateHelper.map_context(context)

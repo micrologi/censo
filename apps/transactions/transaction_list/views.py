@@ -36,6 +36,8 @@ class TransactionListView(TemplateView):
                 "records": records,
                 "fields": fields,
                 "transactions_count": Transaction.objects.count(),
+                "module_name": Transaction.moduleName(),
+                "table_name": Transaction.tableName(),
             }
         )
         TemplateHelper.map_context(context)
