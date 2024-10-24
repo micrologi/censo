@@ -1,0 +1,80 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}Adição de Registro{% endblock title %}
+
+{% block vendor_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/libs/select2/select2.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/form-validation.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/libs/flatpickr/flatpickr.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+{{ block.super }}
+<script src="{% static 'vendor/libs/select2/select2.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/popular.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/bootstrap5.js' %}"></script>
+<script src="{% static 'vendor/libs/@form-validation/auto-focus.js' %}"></script>
+<script src="{% static 'vendor/libs/flatpickr/flatpickr.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_js %}
+{{ block.super }}
+{% endblock page_js %}
+
+{% block content %}
+<!-- Add Transactions Form -->
+<div class="card">
+  <div class="card-body">
+    <form class="add-transactions pt-0" id="TransactionForm" action="{% url 'fundos-add' %}" method="post">
+      {% csrf_token %}
+
+
+      {% for field in fields %}
+        <div class="form-floating form-floating-outline mb-6">
+        {% if field.name == "id" %}
+          <input type="hidden" name="id" id="user_id">
+        {% else %}
+            {% if field.choices %}
+              <select id="{{field.attname}}" class="select2 form-select" name="{{field.name}}">
+                {% for choice in field.choices %}
+                  <option value="{{choice.0}}">{{choice.1}}</option>
+                {% endfor %}
+              </select>
+              <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% elif field.get_internal_type == 'CharField' %}
+                <input type="text" class="form-control" id="{{field.attname}}" name="{{field.name}}" placeholder="{{field.verbose_name}}" maxlength="{{field.max_length|default:''}}" {% if field.blank == False %}required{% endif %} />
+                <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% elif field.get_internal_type == 'DateField' %}
+                <input type="date" class="form-control" id="{{field.attname}}" name="{{field.name}}" placeholder="{{field.verbose_name}}" value="{{field.default}}" {% if field.blank == False %}required{% endif %} />
+                <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% elif field.get_internal_type == 'DateTimeField' %}
+                <input type="datetime-local" class="form-control" id="{{field.attname}}" name="{{field.name}}" placeholder="{{field.verbose_name}}" {% if field.blank == False %}required{% endif %} />
+                <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% elif field.get_internal_type == 'DecimalField' %}
+                <input type="number" class="form-control" id="{{field.attname}}" name="{{field.name}}" placeholder="{{field.verbose_name}}" pattern="^\d*(\.\d{0,2})?$" {% if field.blank == False %}required{% endif %} />
+                <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% elif field.get_internal_type == 'BooleanField' %}
+                <select id="{{field.attname}}" class="select2 form-select" name="{{field.name}}">
+                    <option value="True" selected>Verdadeiro</option>
+                    <option value="False">Falso</option>
+                </select>
+                <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% else %}
+              <input type="text" class="form-control" id="{{field.attname}}" name="{{field.name}}" placeholder="{{field.verbose_name}}" maxlength="{{field.max_length|default:''}}" {% if field.blank == False %}required{% endif %} />
+              <label for="{{field.name}}">{{field.verbose_name}}</label>
+            {% endif %}
+        {% endif %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-primary me-sm-3 me-1" name="submitButton">Salvar</button>
+      <a href="{% url 'fundos' %}" class="btn btn-outline-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+<!--/ Add Transactions Form -->
+{% endblock %}

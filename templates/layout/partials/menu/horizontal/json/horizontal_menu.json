@@ -27,6 +27,27 @@
             "slug": "poderes"
           },
           {
+            "url": "fundos",
+            "name": "Tipos de Fundos",
+            "permission": "fundos.view_fundo",
+            "icon": "menu-icon tf-icons ri-funds-box-line",
+            "slug": "fundos"
+          },
+          {
+            "url": "dependencias",
+            "name": "Tipos de Dependências",
+            "permission": "dependencias.view_dependencia",
+            "icon": "menu-icon tf-icons ri-user-heart-line",
+            "slug": "dependencias"
+          },
+          {
+            "url": "estadoscivis",
+            "name": "Estado Civil",
+            "permission": "estadoscivis.view_estadocivil",
+            "icon": "menu-icon tf-icons ri-empathize-line",
+            "slug": "estadoscivis"
+          },
+          {
             "url": "estados",
             "name": "Estados brasileiros",
             "permission": "estados.view_estado",
@@ -41,6 +62,13 @@
             "slug": "cidades"
           },
           {
+            "url": "sexos",
+            "name": "Sexos",
+            "permission": "sexos.view_sexo",
+            "icon": "menu-icon tf-icons ri-men-line",
+            "slug": "sexos"
+          },
+          {
             "url": "transactions",
             "name": "Empresas",
             "permission": "transactions.view_transaction",
@@ -53,7 +81,7 @@
     {
       "url": "transactions",
       "name": "Importação",
-      "icon": "menu-icon tf-icons ri-layout-2-line",
+      "icon": "menu-icon tf-icons ri-import-fill",
       "slug": "layouts"
     }
   ]

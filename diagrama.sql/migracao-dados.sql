@@ -1,0 +1,1 @@
+insert into dependencias (dependencia) select C0_DESCRICAO from C0_TIPODEPENDENCIA

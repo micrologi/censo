@@ -88,6 +88,10 @@ urlpatterns = [
     path("", include("apps.cargos.urls")),
     path("", include("apps.vinculos.urls")),
     path("", include("apps.poderes.urls")),
+    path("", include("apps.sexos.urls")),
+    path("", include("apps.estadoscivis.urls")),
+    path("", include("apps.fundos.urls")),
+    path("", include("apps.dependencias.urls")),
     # <<crudurls>>
 ]
 

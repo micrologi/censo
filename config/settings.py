@@ -85,6 +85,10 @@ INSTALLED_APPS = [
     "apps.cargos",
     "apps.vinculos",
     "apps.poderes",
+    "apps.sexos",
+    "apps.estadoscivis",
+    "apps.fundos",
+    "apps.dependencias",
     # <<crudsettings>>
     "auth.apps.AuthConfig",
 ]
@@ -184,7 +188,7 @@ LANGUAGES = [
 
 # Set default language
 # ! Make sure you have cleared the browser cache after changing the default language
-LANGUAGE_CODE = "pt"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 
@@ -226,11 +230,11 @@ THEME_VARIABLES = THEME_VARIABLES
 # ------------------------------------------------------------------------------
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.webagencia.com.br"
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = "censorpps@webagencia.com.br"
+EMAIL_HOST_PASSWORD = "micro13347"
 
 # Loginyour mail
 # ------------------------------------------------------------------------------
