@@ -2,6 +2,34 @@
   "menu": [
     {
       "name": "Cadastros",
+      "icon": "menu-icon tf-icons ri-import-fill",
+      "slug": "layouts",
+      "submenu": [
+          {
+            "url": "cargos",
+            "name": "Servidores",
+            "permission": "cargos.view_cargo",
+            "icon": "menu-icon tf-icons ri-graduation-cap-line",
+            "slug": "cargos"
+          }
+      ]
+    },
+    {
+      "name": "Movimentações",
+      "icon": "menu-icon tf-icons ri-import-fill",
+      "slug": "layouts",
+      "submenu": [
+          {
+            "url": "cargos",
+            "name": "Servidores",
+            "permission": "cargos.view_cargo",
+            "icon": "menu-icon tf-icons ri-graduation-cap-line",
+            "slug": "cargos"
+          }
+      ]
+    },
+   {
+      "name": "Auxiliares",
       "icon": "menu-icon tf-icons ri-id-card-line",
       "slug": "mural",
       "submenu": [
@@ -77,12 +105,6 @@
           },
           {}
       ]
-    },
-    {
-      "url": "transactions",
-      "name": "Importação",
-      "icon": "menu-icon tf-icons ri-import-fill",
-      "slug": "layouts"
     }
   ]
 }
