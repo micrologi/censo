@@ -20,11 +20,11 @@
       "slug": "layouts",
       "submenu": [
           {
-            "url": "cargos",
+            "url": "servidores",
             "name": "Servidores",
-            "permission": "cargos.view_cargo",
+            "permission": "servidores.view_servidor",
             "icon": "menu-icon tf-icons ri-graduation-cap-line",
-            "slug": "cargos"
+            "slug": "servidores"
           }
       ]
     },

@@ -92,6 +92,7 @@ urlpatterns = [
     path("", include("apps.estadoscivis.urls")),
     path("", include("apps.fundos.urls")),
     path("", include("apps.dependencias.urls")),
+    path("", include("apps.servidores.urls")),
     # <<crudurls>>
 ]
 

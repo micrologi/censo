@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     "apps.estadoscivis",
     "apps.fundos",
     "apps.dependencias",
+    "apps.servidores",
     # <<crudsettings>>
     "auth.apps.AuthConfig",
 ]
