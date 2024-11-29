@@ -40,4 +40,9 @@ urlpatterns = [
         login_required(TransactionDeleteView.as_view()),
         name=Transaction._meta.db_table + "-delete",
     ),
+    path(
+        Transaction._meta.db_table + "/data",
+        login_required(TransactionListView.get_data()),
+        name=Transaction._meta.db_table + "-data",
+    ),
 ]

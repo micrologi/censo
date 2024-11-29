@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     "apps.fundos",
     "apps.dependencias",
     "apps.servidores",
+    "apps.uploads",
     # <<crudsettings>>
     "auth.apps.AuthConfig",
 ]

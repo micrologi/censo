@@ -49,83 +49,34 @@
 
 <div class="card">
   <div class="card-datatable table-responsive">
-    <table class="datatables-transaction table">
+
+    <table class="datatables-transaction table" id="items-table">
       <thead class="table-light">
         <tr class="text-nowrap">
-          <th></th>
-          {% for field in fields %}
-            <th>{{ field.verbose_name }}</th>
-          {% endfor %}
-          <th>Ações</th>
+					<th>id</th>
+					<th>Ano</th>
+					<th>Mês</th>
+					<th>Órgão</th>
         </tr>
       </thead>
-
-      <tbody>
-        {% for record in records %}
-        <tr>
-          <td></td>
-          {% for field_value,field_atrib in record.1 %}
-            {% if field_atrib == 'BooleanField' %}
-              <td class="text-nowrap text-center">
-                <div class="badge bg-label-{% if field_value == True %}success{% else %}warning{% endif %} rounded-pill">
-                  {% if field_value == True %}
-                    <i class="tf-icons ri-check-fill" title="Verdadeiro"></i>
-                  {% else %}
-                    <i class="tf-icons ri-close-line" title="Falso"></i>
-                  {% endif %}
-                </div>
-              </td>
-            {% elif field_atrib == 'DateField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'TimeField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'DateTimeField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'IntegerField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'BigIntegerField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'AutoField' %}
-              <td class="text-nowrap text-center">
-                {{ field_value }}
-              </td>
-            {% elif field_atrib == 'DecimalField' %}
-              <td class="text-nowrap text-end">
-                {{ field_value }}
-              </td>
-            {% else %}
-              <td class="text-nowrap text-start">
-                <p title="{{ field_value }}">{{ field_value }}</p>
-              </td>
-            {% endif %}
-          {% endfor %}
-          <td>
-            <div class="d-inline-block text-nowrap">
-              <!-- permission required: edit_transaction -->
-              {% if perms.servidores.edit_transaction %}
-              <a href="{% url 'servidores-update' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect" title="Editar"><i class='ri-edit-box-line ri-22px'></i></a>
-              {% endif %}
-              <!-- permission required: delete_transaction -->
-              {% if perms.servidores.delete_transaction %}
-              <a href="{% url 'servidores-delete' record.0 %}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect delete-transaction" title="Deletar"><i class="ri-delete-bin-7-line ri-22px"></i></a>
-              {% endif %}
-            </div>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-
+      <tbody></tbody>
     </table>
+
+		<script language="javascript">
+			$(document).ready(function () {
+				$('#items-table').dataTable({
+					serverSide: true,
+					sAjaxSource: "{% url 'servidores-data' %}",
+              columns: [
+                  {name: "id", data: 0},
+                  {name: "NU_ANO", data: 1},
+                  {name: "NU_MES", data: 2},
+                  {name: "NO_ORGAO", data: 3},
+              ],
+				});
+			});
+		</script>
+
   </div>
 </div>
 {% endif %}

@@ -25,6 +25,13 @@
             "permission": "servidores.view_servidor",
             "icon": "menu-icon tf-icons ri-graduation-cap-line",
             "slug": "servidores"
+          },
+          {
+            "url": "uploads",
+            "name": "Uploads",
+            "permission": "uploads.view_upload",
+            "icon": "menu-icon tf-icons ri-graduation-cap-line",
+            "slug": "uploads"
           }
       ]
     },

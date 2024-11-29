@@ -1,15 +1,24 @@
 from django.views.generic import TemplateView
+from apps.servidores.models import Servidor as Transaction
+from django.core import serializers
 from web_project.template_helpers.theme import TemplateHelper
 from web_project import TemplateLayout
-
-from apps.servidores.models import Servidor as Transaction
 
 
 class TransactionListView(TemplateView):
 
+    def get_data():
+        queryset = Transaction.objects.all()
+        columns = ["id", "NU_ANO", "NU_MES", "NO_ORGAO"]
+
+        print(serializers.serialize("json", queryset))
+
+        return serializers.serialize("json", queryset)
+
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
-        transactions = self.get_annotated_transactions()
+
+        transactions = self.get_annotated_transactions(5)
         fields = Transaction._meta.get_fields()
 
         # Monta a lista de informações dinamicamente
@@ -44,9 +53,9 @@ class TransactionListView(TemplateView):
         TemplateHelper.map_context(context)
         return context
 
-    def get_annotated_transactions(self):
-        # Get all transactions and order them by ID
-        first_field = Transaction._meta.get_fields(
-            include_parents=False, include_hidden=False
-        )
-        return Transaction.objects.all().order_by(first_field[0].name)
+    def get_annotated_transactions(self, num_records):
+
+        # sql_result = Transaction.objects.all().order_by("-id")[0:num_records]
+        sql_result = Transaction.objects.all().order_by("-id")
+
+        return sql_result

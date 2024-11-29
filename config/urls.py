@@ -93,6 +93,7 @@ urlpatterns = [
     path("", include("apps.fundos.urls")),
     path("", include("apps.dependencias.urls")),
     path("", include("apps.servidores.urls")),
+    path("", include("apps.uploads.urls")),
     # <<crudurls>>
 ]
 

@@ -1,0 +1,46 @@
+{% extends layout_path %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}File upload - Forms{% endblock %}
+
+{% block vendor_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/libs/dropzone/dropzone.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+{{ block.super }}
+<script src="{% static 'vendor/libs/dropzone/dropzone.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_js %}
+{{ block.super }}
+<script src="{% static 'js/forms-file-upload.js' %}"></script>
+{% endblock page_js %}
+
+{% block content %}
+<div class="row">
+  <!-- Basic  -->
+  <div class="col-12">
+    <div class="card mb-6">
+      <h5 class="card-header">Envio de planilhas de movimentos</h5>
+      <div class="card-body">
+        <form action="{% url 'uploads' %}" method="post" class="dropzone needsclick" id="dropzone-basic" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="dz-message needsclick">
+            Arraste um arquivo por vez ou clique aqui para envio!
+            <span class="note needsclick">(Arquivos selecionados são <span class="fw-medium">não</span> atualmente enviados.)</span>
+          </div>
+          <div class="fallback">
+            <input name="excel" id="excel" type="file" accept=".xls,.xlsx" required/>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- /Basic  -->
+</div>
+{% endblock %}
